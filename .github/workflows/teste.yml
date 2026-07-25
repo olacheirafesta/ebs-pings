@@ -1,0 +1,8 @@
+name: Teste Actions público
+on:
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Actions em repo público funcionam"
