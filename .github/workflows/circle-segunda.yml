@@ -1,0 +1,14 @@
+name: Circle · post Vitórias da Semana (segunda 9h Lisboa)
+on:
+  schedule:
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chamar endpoint Vercel
+        run: |
+          curl -fsS --max-time 60 -X POST \
+            -H "x-cron-key: ${{ secrets.CRON_SECRET }}" \
+            https://ebs-webhooks.vercel.app/api/circle-segunda
