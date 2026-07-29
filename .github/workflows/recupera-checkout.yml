@@ -1,0 +1,14 @@
+name: InstaEventos · recuperação de checkouts (hora a hora)
+on:
+  schedule:
+    - cron: "25 * * * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chamar endpoint Vercel
+        run: |
+          curl -fsS --max-time 90 -X POST \
+            -H "x-cron-key: ${{ secrets.CRON_SECRET }}" \
+            https://ebs-webhooks.vercel.app/api/recupera-checkout
