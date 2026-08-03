@@ -1,0 +1,14 @@
+name: Circle · auto (avisos + lembretes + calendário, 15 em 15 min)
+on:
+  schedule:
+    - cron: "*/15 6-13 * * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Chamar endpoint Vercel
+        run: |
+          curl -fsS --max-time 90 -X POST \
+            -H "x-cron-key: ${{ secrets.CRON_SECRET }}" \
+            https://ebs-webhooks.vercel.app/api/circle-auto
