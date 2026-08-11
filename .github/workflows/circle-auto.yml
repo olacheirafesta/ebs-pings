@@ -1,7 +1,12 @@
-name: Circle · auto (avisos + lembretes + calendário, 15 em 15 min)
+name: Circle · auto (avisos + lembretes + calendário, 5 em 5 min)
 on:
   schedule:
-    - cron: "*/15 6-13 * * *"
+    # De 5 em 5 min nas horas críticas (6-13 UTC = 7-14 Lisboa).
+    # O agendador do GitHub é "melhor esforço" e atrasa: com */15 chegou a
+    # disparar só de hora a hora e perdeu janelas de publicação inteiras
+    # (ex.: "Estamos a começar" de 04/08/2026). Com */5 cada janela de uma
+    # hora tem ~12 tentativas em vez de 1.
+    - cron: "*/5 6-13 * * *"
   workflow_dispatch:
 jobs:
   ping:
